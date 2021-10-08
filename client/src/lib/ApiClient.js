@@ -28,10 +28,17 @@ const apiClient = {
   },
   createBoard: function(board, callback) {
     return axios
-      .post(routes.CREATE_BOARD_URL, {board})
+      .post(routes.CREATE_BOARD_URL, { board })
       .then(unwrapData)
       .then(callback)
       .catch(logError);
+  },
+  getBoard: function(id, callback) {
+    return axios
+      .get(`${routes.BOARDS_INDEX_URL}/${id}`)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError)
   }
 };
 

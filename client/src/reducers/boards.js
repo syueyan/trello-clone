@@ -7,6 +7,13 @@ export default function boards(state = [], action) {
       const newBoard = action.board;
       return state.concat(newBoard);
     }
+    case "GET_BOARD_REQUEST": {
+      return state;
+    }
+    case "GET_BOARD_SUCCESS": {
+      console.log(action.boards)
+      return state;
+    }
     default:
       return state;
   }

@@ -4,17 +4,9 @@ const Schema = mongoose.Schema;
 const ListSchema = new Schema({
   title: String,
   boardId: { type: Schema.ObjectId, ref: "Board" },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
   position: Number,
   cards: [{ type: Schema.ObjectId, ref: "Card" }],
-})
+}, { timestamps: true }) 
 
 const List = mongoose.model('List', ListSchema);
 
