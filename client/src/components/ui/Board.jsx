@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 import * as actions from "../../actions/BoardActions";
+import ExistingLists from "./ExistingList";
 
 const Board = () => {
   const dispatch = useDispatch();
-  const boards = useSelector(state => state.boards)
   const match = useRouteMatch();  
+
+  const board = useSelector(state => {
+    return state.boards.filter(board => board._id === match.params.id)[0]
+  })
 
   useEffect(() => {
     const fetchBoard = async () => {
@@ -19,7 +23,7 @@ const Board = () => {
     <>
        <header>
         <ul>
-          <li id="title">My Title</li>
+          <li id="title">{board.title}</li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>
@@ -31,11 +35,8 @@ const Board = () => {
         </div>
       </header>
       <main>
-        <div id="list-container" className="list-container">
-          <div id="existing-lists" className="existing-lists">
-            <div className="list-wrapper">
-              <div className="list-background">
-                <div className="list">
+                <ExistingLists boardId={board._id} />
+                {/* <div className="list">
                   <a className="more-icon sm-icon" href=""></a>
                   <div>
                     <p className="list-title">Stuff to try (this is a list)</p>
@@ -239,21 +240,9 @@ const Board = () => {
                     </div>
                   </div>
                   <div className="add-card-toggle" data-position="bottom">
-                    Add a card...
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="new-list" className="new-list">
-            <span>Add a list...</span>
-            <input type="text" placeholder="Add a list..." />
-            <div>
-              <input type="submit" className="button" value="Save" />
-              <i className="x-icon icon"></i>
-            </div>
-          </div>
-        </div>
+                    Add a card... */}
+                  {/* </div> */}
+                {/* </div> */}
       </main>
       <div className="menu-sidebar">
         <div id="menu-main" className="main slide">

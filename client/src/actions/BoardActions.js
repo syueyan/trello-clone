@@ -13,8 +13,8 @@ export function getBoardRequest() {
   return { type: types.GET_BOARD_REQUEST };
 }
 
-export function getBoardSuccess(boards) {
-  return { type: types.GET_BOARD_SUCCESS, boards }
+export function getBoardSuccess(board) {
+  return { type: types.GET_BOARD_SUCCESS, board }
 }
 
 export function createBoardRequest() {
@@ -35,9 +35,8 @@ export function fetchBoards() {
 export function getBoard(id) {
   return async function (dispatch) {
     await dispatch(getBoardRequest());
-    const returnedBoard = await apiClient.getBoard(id, data => dispatch(getBoardSuccess(data.boards)));
-    console.log(returnedBoard)
-    return returnedBoard
+    await apiClient.getBoard(id, board => {
+      dispatch(getBoardSuccess(board.board))});
   }
 }
 
