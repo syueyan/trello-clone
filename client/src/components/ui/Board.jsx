@@ -1,24 +1,41 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as actions from "../../actions/BoardActions";
 import ExistingLists from "./ExistingList";
 
+/*
+the board component will be rendered in response to route /boards/:id
+the board component will be responsible for:
+  -parsing the URL for the id
+  -sending the GET request to /api/boards/:id
+  -dispatching an action to the store
+  -render the board
+*/
+
 const Board = () => {
   const dispatch = useDispatch();
-  const match = useRouteMatch();  
+  const boardId = useParams().id;
 
+  // useSelector accesses the store's state (state is an object) to find board
   const board = useSelector(state => {
-    return state.boards.filter(board => board._id === match.params.id)[0]
+    return state.boards.find(board => board._id === boardId)
   })
+
+  // redux is used to manage state
+  // useEffect is for side effects
+      // callback function takes care of side-effect logic
+        // this triggers state changes to the store
+      // dependency array - if dependencies change, callback will execute
 
   useEffect(() => {
     const fetchBoard = async () => {
-      dispatch(actions.getBoard(match.params.id))
+      dispatch(actions.getBoard(boardId))
     }
     fetchBoard()
-  }, [dispatch])
+  }, [dispatch, boardId])
   
+  // renders the board
   return (
     <>
        <header>

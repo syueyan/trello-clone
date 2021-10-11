@@ -15,6 +15,18 @@ import MoveCardPopover from "./ui/MoveCardPopover";
 import SingleBoard from "./ui/SingleBoard";
 import Board from "./ui/Board"
 
+/*
+routers create unique URLs
+routers allow users to move between components while preserving user state
+
+the board component will be rendered in response to route /boards/:id
+the board component will be responsible for:
+  -parsing the URL for the id
+  -sending a GET request to /api/boards/:id
+  -dispatching an action to the store
+  -render the board
+*/
+
 const Application = () => {
   return (
     <div>

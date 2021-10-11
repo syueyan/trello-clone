@@ -32,11 +32,12 @@ export function fetchBoards() {
   };
 }
 
+// this dispatch is thunk
+  // thunk allows us to dispatch actions from asynchronous requests (like GET)
 export function getBoard(id) {
   return async function (dispatch) {
-    await dispatch(getBoardRequest());
-    await apiClient.getBoard(id, board => {
-      dispatch(getBoardSuccess(board.board))});
+    await apiClient.getBoard(id, data => {
+      dispatch(getBoardSuccess(data.board))});
   }
 }
 

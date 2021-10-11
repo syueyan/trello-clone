@@ -16,7 +16,9 @@ export default function listsReducer(state = [], action) {
         if (!matchedList) newState.push(returnedList)
       })
       return newState 
-    }  
+    }  case "LIST_CREATED": {
+      return state.concat(action.list)
+    }
     default:
       return state;
   }
