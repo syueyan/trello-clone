@@ -3,7 +3,6 @@ export default function listsReducer(state = [], action) {
     case "GET_BOARD_SUCCESS": {
       let newState = [...state]
       const returnedLists = Object.values(action.board.lists)
-
       returnedLists.forEach(returnedList => {
         returnedList = {...returnedList}
         delete returnedList.cards
