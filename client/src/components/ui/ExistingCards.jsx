@@ -7,14 +7,17 @@ const ExistingCard = ({listId}) => {
   const cardTiles = cards.map(card => {
     if (card.listId !== listId) return 
     return (
-      <div className="card-background">
+      <div key={card._id} className="card-background">
         <div className="card ">
           <i className="edit-toggle edit-icon sm-icon"></i>
           <div className="card-info">
             {card.labels.map(color => {
               return (
-                <div className={`card-label ${color} colorblindable`}></div>
-              )
+                <div
+                  key={card._id + color}
+                  className={`card-label ${color} colorblindable`}
+                ></div>
+              );
             })}
             <p>
               {card.title}

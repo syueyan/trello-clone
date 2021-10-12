@@ -7,3 +7,4 @@ export const GET_BOARD_REQUEST = "GET_BOARD_REQUEST";
 export const GET_BOARD_SUCCESS = "GET_BOARD_SUCCESS";
 
 export const LIST_CREATED = "LIST_CREATED"
+export const LIST_EDIT = "LIST_EDIT"
