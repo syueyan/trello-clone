@@ -5,7 +5,6 @@ const ExistingCard = ({listId}) => {
   const cards = useSelector(state => state.cards)
 
   const cardTiles = cards.map(card => {
-    console.log(card.listId, listId)
     if (card.listId !== listId) return 
     return (
       <div className="card-background">

@@ -22,7 +22,7 @@ const Board = () => {
     return state.boards.find((board) => board._id === boardId);
   });
 
-  const newListHandler = (boardId)
+  // const newListHandler = (boardId)
 
   if (loading) return <></>;
   else

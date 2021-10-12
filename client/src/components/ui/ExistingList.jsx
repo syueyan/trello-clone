@@ -1,12 +1,31 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import ExistingCards from './ExistingCards'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from '../../actions/ListActions'
+import ExistingCards from "./ExistingCards";
 
-const ExistingLists = ({boardId}) => {
-  const lists = useSelector(state => state.lists)
-  const boardLists = lists.filter(list => list.boardId === boardId)
+const ExistingLists = ({ boardId }) => {
+  const dispatch = useDispatch()
+  const lists = useSelector((state) => state.lists);
+  const boardLists = lists.filter((list) => list.boardId === boardId);
 
-  const listTiles = boardLists.map(list => {
+  const [newListForm, setNewListForm] = useState(false);
+  const [newListTitle, setNewListTitle] = useState()
+
+  const newListFormStatus = newListForm ? "new-list selected" : "new-list";
+  const toggleNewListForm = () => setNewListForm(!newListForm);
+
+  const submitNewList = async () => {
+    const newList = {
+      boardId,
+      list: {
+        title: newListTitle
+      }
+    }
+    await dispatch(actions.createList(newList))
+    toggleNewListForm()
+  };
+
+  const listTiles = boardLists.map((list) => {
     return (
       <div className="list-wrapper">
         <div className="list-background">
@@ -23,7 +42,7 @@ const ExistingLists = ({boardId}) => {
               <div className="add-options">
                 <span>...</span>
               </div>
-            </div> 
+            </div>
             <div className="add-dropdown add-bottom">
               <div className="card">
                 <div className="card-info"></div>
@@ -42,24 +61,33 @@ const ExistingLists = ({boardId}) => {
           </div>
         </div>
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <div id="list-container" className="list-container">
       <div id="existing-lists" className="existing-lists">
         {listTiles}
       </div>
-      <div id="new-list" className="new-list">
-        <span>Add a list...</span>
-        <input type="text" placeholder="Add a list..." />
+      <div id="new-list" className={newListFormStatus}>
+        <span onClick={toggleNewListForm}>Add a list...</span>
+        <input 
+          type="text" 
+          value={newListTitle} 
+          onChange={(e) => setNewListTitle(e.target.value)} 
+        />
         <div>
-          <input type="submit" className="button" value="Save" />
-          <i class="x-icon icon"></i>
+          <input
+            type="submit"
+            className="button"
+            value="Save"
+            onClick={submitNewList}
+          />
+          <i class="x-icon icon" onClick={toggleNewListForm}></i>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default ExistingLists
+export default ExistingLists;
