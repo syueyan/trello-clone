@@ -59,13 +59,6 @@ const getBoardId = (req, res, next) => {
 //   })
 // }
 
-// // boardId is in the schema
-// // but it doesn't default to anything
-// const createCard = (req, res, next) => {
-//   Card.create({...req.body.card, listId: req.body.listId}).then((card) => {
-//     res.json(card)
-//   })
-// }
 
 // // the comments and actions fields
 // // hold an array of objects

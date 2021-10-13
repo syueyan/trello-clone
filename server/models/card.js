@@ -16,14 +16,6 @@ const CardSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
   dueDate: {
     type: Date,
     default: null,
@@ -37,7 +29,7 @@ const CardSchema = new Schema({
     type: Number,
     default: 0,
   }
-})
+}, { timestamps: true })
 
 const Card = mongoose.model('Card', CardSchema);
 
